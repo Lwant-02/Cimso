@@ -103,4 +103,12 @@ export const useUtilsStore = create((set, get) => ({
       return false;
     }
   },
+  finalPrice : null,
+  setFinalPrice: (v) => {
+    set({ finalPrice: v});
+  },
+  discountCouponPrice: null,
+  setCouponDiscountPrice: (v) => {
+    set({discountCouponPrice : v});
+  }
 }));

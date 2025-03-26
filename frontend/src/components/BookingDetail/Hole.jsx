@@ -1,29 +1,31 @@
 import React from "react";
-// import { useBookingStore } from "../../store/useBookingStore";
 import { useNewBookingStore } from "../../store/useNewBookingStore";
 
 export const Hole = ({ holeNumber }) => {
-  // const { hole, setHole, setTimeAndPrice } = useBookingStore();
   const { hole, setHole, setTimeAndPrice } = useNewBookingStore();
+
+  const isChecked = hole === holeNumber;
+
   const handleCheckboxChange = () => {
-    if (hole === holeNumber) {
-      setHole(null);
-      setTimeAndPrice({}); // Clear time and price if it's already selected
+    if (isChecked) {
+      // Optional: Allow deselection if clicked again (uncomment if desired)
+      // setHole(null);
+      // setTimeAndPrice({});
     } else {
       setHole(holeNumber);
+      setTimeAndPrice({}); // Clear time and price when switching holes
     }
   };
 
   return (
     <fieldset className="fieldset p-3 bg-[#2B2B2B] border border-base-300 rounded-box w-full">
-      <label className="fieldset-label text-primary-color text-sm font-semibold">
+      <label className="fieldset-label text-primary-color text-sm font-semibold flex items-center gap-2">
         <input
           type="checkbox"
           className="checkbox checkbox-success checkbox-sm"
           name="checkbox"
-          checked={hole === holeNumber} // Checked if it's the selected hole
+          checked={isChecked} // Checked if it's the selected hole
           onChange={handleCheckboxChange} // Handle checkbox change
-          disabled={hole && hole !== holeNumber}
         />
         {holeNumber} Holes
       </label>
