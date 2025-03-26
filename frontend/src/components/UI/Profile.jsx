@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState , useEffect } from "react";
 import { motion } from "framer-motion";
 import { ImagePicker } from "./ImagePicker";
 import { LogOut, Mail, Phone, UserRound, X, Tickets } from "lucide-react";
@@ -9,7 +9,13 @@ import { useNewAuthStore } from "../../store/useNewAuthStore";
 import toast from "react-hot-toast";
 
 export const Profile = () => {
-  const { authUser, updateAccount, signOut } = useNewAuthStore();
+  const { authUser, updateAccount, signOut , coupon , checkAuth } = useNewAuthStore();
+
+  useEffect(() => {
+    if (!coupon) {  
+      checkAuth();
+    }
+  }, [checkAuth, coupon]);
 
   const [formData, setFormData] = useState({
     full_name: authUser.full_name || "",
@@ -146,18 +152,42 @@ export const Profile = () => {
           onChange={(e) => setFormData({ ...formData, x_url: e.target.value })}
         />
 
-        <p className="text-sm">Your Cupon(Read Only)</p>
-        <div className="w-full bg-yellow-100 border border-primary-content/20 mb-5 flex gap-2 px-3 p-2 rounded-xl items-center justify-center">
-          <Tickets className="size-5" />
-          <p className="text-sm">
-            {authUser.coupons?.length === 0
-              ? "No coupons to show"
-              : authUser.coupons?.map((item, index) => (
-                  <span key={index} className="block">
-                    {item.name || item} {/* Adjust based on coupon structure */}
-                  </span>
-                ))}
-          </p>
+        <div className="w-full mb-5">
+          <p className="text-sm font-medium text-gray-600 mb-2">Your Coupons</p>
+          <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border border-amber-200 rounded-lg overflow-hidden shadow-sm">
+            {coupon?.length === 0 ? (
+              <div className="flex items-center gap-2 p-3 text-gray-500">
+                <Tickets className="size-5 text-amber-400" />
+                <span>No coupons available</span>
+              </div>
+            ) : (
+                <div className="divide-y divide-amber-100">
+                  {coupon?.map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="flex items-center gap-3 p-3 hover:bg-amber-50/50 transition-colors"
+                    >
+                      <div className="bg-amber-100 p-2 rounded-full">
+                        <Tickets className="size-5 text-amber-600" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-800">
+                          {item.code || "COUPON CODE"}
+                        </p>
+                        {item.discount && (
+                          <p className="text-xs text-amber-600 mt-1">
+                            {item.discount}% OFF
+                          </p>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+          </div>
         </div>
         <CustomButton buttonName="Save Changes" type="submitButton" />
       </div>
