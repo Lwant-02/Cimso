@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CustomButton } from "../UI/CustomButton";
 import { ShoppingCart } from "lucide-react";
 import { SummaryInfo } from "../Payment/SummaryInfo";
@@ -12,6 +12,7 @@ import { useNewBookingStore } from "../../store/useNewBookingStore";
 export const OrderContainer = () => {
   // const { authUser } = useAuthStore();
   const { authUser } = useNewAuthStore();
+  const [coupon, setCoupon] = useState("");
   // const { packageType, hole, timeAndPrice, setGolfer, golfer } =
   //   useBookingStore();
   const { packageType, hole, timeAndPrice, setGolfer, golfer } =
@@ -30,6 +31,29 @@ export const OrderContainer = () => {
     }
     navigate(`/booking/check-out/${courseId}`);
   };
+
+  const calculateTotalPrice = () => {
+    if (packageType.price && timeAndPrice.price && golfer) {
+      return (
+        Number(packageType.price) + Number(timeAndPrice.price) * Number(golfer)
+      );
+    }
+    return (
+      Number(packageType.price) ||
+      Number(timeAndPrice.price) * Number(golfer) ||
+      0
+    );
+  };
+  const totalPrice = calculateTotalPrice();
+
+  const calulateCouponDiscount = () => {
+    const discount = totalPrice * (Number(coupon.discount_value) / 100);
+    return discount;
+  };
+  console.log((coupon.discount_value / 100) * totalPrice);
+
+  const couponDiscount = calulateCouponDiscount();
+  const finalPrice = totalPrice - couponDiscount;
 
   return (
     <div className="sm:w-96 flex flex-col justify-start items-start bg-primary-color rounded-xl overflow-hidden shadow-md h-auto border border-base-content/10">
@@ -54,6 +78,26 @@ export const OrderContainer = () => {
           />
           <SummaryInfo name="Package name" value={packageType.title || "-"} />
           <SummaryInfo name="Package price" value={packageType.price || "-"} />
+
+          <select
+            className="select w-full"
+            value={coupon?.code || ""}
+            onChange={(e) => {
+              const selectedCoupon = authUser.coupons.find(
+                (c) => c.code === e.target.value
+              );
+              setCoupon(selectedCoupon); // Store full object
+            }}
+          >
+            <option disabled value="">
+              Select a coupon
+            </option>
+            {authUser.coupons.map((item, index) => (
+              <option key={index} value={item.code}>
+                {item.code}
+              </option>
+            ))}
+          </select>
           <input
             type="text"
             placeholder="Type the number of Golfer"
@@ -69,16 +113,14 @@ export const OrderContainer = () => {
         </div>
         <div className="flex flex-col gap-3 px-3 w-full mt-2 pb-5">
           <span className="flex justify-between">
-            <p className="text-base font-semibold">Total</p>
+            <p className="text-base font-semibold">Coupons Discount </p>
             <p className="text-base font-semibold">
-              ฿
-              {packageType.price && timeAndPrice.price && golfer
-                ? Number(packageType.price) +
-                  Number(timeAndPrice.price) * Number(golfer)
-                : packageType.price ||
-                  timeAndPrice.price * Number(golfer) ||
-                  "0"}
+              {!couponDiscount ? "฿0" : `฿${couponDiscount}`}
             </p>
+          </span>
+          <span className="flex justify-between">
+            <p className="text-base font-semibold">Total</p>
+            <p className="text-base font-semibold">฿{finalPrice}</p>
           </span>
           <CustomButton
             buttonName="Book Now"
