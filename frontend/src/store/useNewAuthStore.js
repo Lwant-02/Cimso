@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 export const useNewAuthStore = create((set, get) => ({
   authUser: null,
+  coupon: null,
   token: localStorage.getItem("authUser") || null,
   setToken: (v) => {
     set({ token: v });
@@ -78,7 +79,8 @@ export const useNewAuthStore = create((set, get) => ({
         headers: { Authorization: `Bearer ${get().token}` },
       });
       if (res) {
-        set({ authUser: res.data.user });
+        console.log(res)
+        set({ authUser: res.data.user  , coupon: res.data.coupon });
       }
     } catch (error) {
       set({ authUser: null });
