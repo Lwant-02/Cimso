@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: emerald --default;
+}
+
+@theme {
+  --color-primary-color: #eafaea;
+  --color-secondary-color: #2b2b2b;
+  --color-accent-color: #1e5631;
+  --font-playfair: "Playfair", "sans-serif";
+  --font-roboto: "Roboto", serif;
+  --font-poppin: "Poppins", "sans-serif";
+}
