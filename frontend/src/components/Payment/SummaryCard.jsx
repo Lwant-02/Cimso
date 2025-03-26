@@ -43,7 +43,7 @@ export const SummaryCard = ({ formData }) => {
     packageId,
   } = useNewBookingStore();
   const { authUser } = useNewAuthStore();
-  const { openModal, closeModal, setActiveTab, sentConfirmEmail } =
+  const { openModal, closeModal, setActiveTab, sentConfirmEmail , finalPrice , discountCouponPrice } =
     useUtilsStore();
   const { courseId } = useParams();
   const navigate = useNavigate();
@@ -77,8 +77,7 @@ export const SummaryCard = ({ formData }) => {
       holes: hole,
       package_id: packageId,
       hole_price: timeAndPrice.price,
-      total_price: totalPrice,
-      coupon_code: "",
+      total_price: finalPrice,
       status: "confirmed",
     });
 
@@ -150,9 +149,16 @@ export const SummaryCard = ({ formData }) => {
           name="Package Price"
           value={` ฿${packageType.price || 0}`}
         />
+        {discountCouponPrice > 0 && (
+          <SummaryInfo
+            name="Coupon Discount"
+            value={`-฿${discountCouponPrice}`}
+            style="border-t border-base-content/20 pt-3"
+          />
+        )}
         <SummaryInfo
           name="Total"
-          value={`฿ ${totalPrice}`}
+          value={`฿ ${finalPrice}`}
           style="mt-5 border-t border-base-content/20 pt-3"
           textStyle="text-lg font-semibold"
           valueStyle="text-lg font-semibold"

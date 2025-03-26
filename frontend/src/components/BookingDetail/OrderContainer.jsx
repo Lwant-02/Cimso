@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { CustomButton } from "../UI/CustomButton";
 import { ShoppingCart } from "lucide-react";
 import { SummaryInfo } from "../Payment/SummaryInfo";
@@ -8,6 +8,7 @@ import { useBookingStore } from "../../store/useBookingStore";
 import toast from "react-hot-toast";
 import { useNewAuthStore } from "../../store/useNewAuthStore";
 import { useNewBookingStore } from "../../store/useNewBookingStore";
+import { useUtilsStore } from "../../store/useUtilsStore";
 
 export const OrderContainer = () => {
   // const { authUser } = useAuthStore();
@@ -19,6 +20,7 @@ export const OrderContainer = () => {
     useNewBookingStore();
   const { courseId } = useParams();
   const navigate = useNavigate();
+  const { setFinalPrice, setCouponDiscountPrice } = useUtilsStore();
 
   const handleBooknow = () => {
     if (!hole || !timeAndPrice.time || !timeAndPrice.price) {
@@ -48,12 +50,17 @@ export const OrderContainer = () => {
 
   const calulateCouponDiscount = () => {
     const discount = totalPrice * (Number(coupon.discount_value) / 100);
-    return discount;
+    return discount || 0;
   };
   console.log((coupon.discount_value / 100) * totalPrice);
 
   const couponDiscount = calulateCouponDiscount();
-  const finalPrice = totalPrice - couponDiscount;
+  const finalPrice = couponDiscount ? totalPrice - couponDiscount : totalPrice;
+
+  useEffect(() => {
+    setFinalPrice(finalPrice);
+    setCouponDiscountPrice(couponDiscount);
+  }, [finalPrice, couponDiscount, setFinalPrice, setCouponDiscountPrice]);
 
   return (
     <div className="sm:w-96 flex flex-col justify-start items-start bg-primary-color rounded-xl overflow-hidden shadow-md h-auto border border-base-content/10">
@@ -120,7 +127,7 @@ export const OrderContainer = () => {
           </span>
           <span className="flex justify-between">
             <p className="text-base font-semibold">Total</p>
-            <p className="text-base font-semibold">฿{finalPrice}</p>
+            <p className="text-base font-semibold">฿{!finalPrice ? "0" : `${finalPrice}`}</p>
           </span>
           <CustomButton
             buttonName="Book Now"
