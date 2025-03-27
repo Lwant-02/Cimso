@@ -204,3 +204,38 @@ export const tournamentsImages = {
   logo5:
     "https://res.cloudinary.com/dxmvqasul/image/upload/v1742204442/courtney-cook-qbP8Cj4Xa9o-unsplash_t4pfp0.jpg",
 };
+
+export const defaultCommunity = [
+  {
+    image:
+      "https://res.cloudinary.com/dxmvqasul/image/upload/v1743043238/jonas-kakaroto-KIPqvvTOC1s-unsplash_cdvpfq.jpg",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dxmvqasul/image/upload/v1743043165/meritt-thomas-aoQ4DYZLE_E-unsplash_vzh8u3.jpg",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dxmvqasul/image/upload/v1743043159/microsoft-365-7mBictB_urk-unsplash_wre15t.jpg",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dxmvqasul/image/upload/v1743043157/christian-buehner-DItYlc26zVI-unsplash_j8ls7x.jpg",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dxmvqasul/image/upload/v1743043157/matheus-ferrero-W7b3eDUb_2I-unsplash_vyxyex.jpg",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dxmvqasul/image/upload/v1743043157/jonathan-borba-n1B6ftPB5Eg-unsplash_ef7rar.jpg",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dxmvqasul/image/upload/v1743043147/smart-attractive-asian-glasses-male-standing-smile-with-freshness-joyful-casual-blue-shirt-portrait-white-background_xq6w1c.jpg",
+  },
+  {
+    image:
+      "https://res.cloudinary.com/dxmvqasul/image/upload/v1743043147/happy-confident-asian-male-entrepreneur-crossing-arms-chest_kilxkx.jpg",
+  },
+];

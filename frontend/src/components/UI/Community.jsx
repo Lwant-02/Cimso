@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { CommunityCard } from "./CommunityCard";
 import { useNewBookingStore } from "../../store/useNewBookingStore";
+import { defaultCommunity } from "../../utils/constant";
 
 export const Community = () => {
   const { networkUsers } = useNewBookingStore();
@@ -38,6 +39,7 @@ export const Community = () => {
             linkedin_url={user.linkedin_url}
             name={user.full_name}
             twitter_url={user.x_url}
+            image={defaultCommunity[index % defaultCommunity.length].image}
           />
         ))}
       </div>

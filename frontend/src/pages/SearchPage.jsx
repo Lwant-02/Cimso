@@ -7,14 +7,18 @@ import { CustomNotFound } from "../components/UI/CustomNotFound";
 import { useNavigate } from "react-router-dom";
 import { useBookingStore } from "../store/useBookingStore";
 import { Spinner } from "../components/UI/Spinner";
+import { useNewBookingStore } from "../store/useNewBookingStore";
 
 export const SearchPage = () => {
-  const { courses } = useBookingStore();
+  // const { courses } = useBookingStore();
+  const { courses } = useNewBookingStore();
   const [hasSearched, setHasSearched] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const [filteredCourses, setFilteredCourses] = useState([]);
+
+  console.log(courses);
 
   const handleSearch = () => {
     setHasSearched(true);
@@ -23,11 +27,13 @@ export const SearchPage = () => {
     setTimeout(() => {
       const result = courses.filter(
         (course) =>
-          course.courseName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          course.location.city
+          course.course_name
             .toLowerCase()
             .includes(searchQuery.toLowerCase()) ||
-          course.location.country
+          course.location_city
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          course.location_country
             .toLowerCase()
             .includes(searchQuery.toLowerCase())
       );

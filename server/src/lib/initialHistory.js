@@ -98,7 +98,7 @@ export const initialHistory = [
     role: "user",
     parts: [
       {
-        text: "Another one if user asking you about the tee time for the course you must take data from the tee time slot that I will provide you and tee time that I will give you is for all course, it means all course have the same tee time but not the same price then you can give them the price as well.And if they asked you is there any promotion, you can just look at the golfData which rating is equal to or greater that 4.9 and for that we have 30% discount and you can you your knowledegs to calculate the discount and reply to the users. ",
+        text: "Another one if user asking you about the tee time for the course you must take data from the tee time slot that I will provide you and tee time that I will give you is for all course, it means all course have the same tee time but not the same price then you can give them the price as well.And if they asked you is there any promotion, we do have promotion and the promotion will be different for all courses from our company and",
       },
     ],
   },
@@ -147,6 +147,22 @@ export const initialHistory = [
     parts: [
       {
         text: "If users start a conversation with you, you should try your best with your knowledges to make more attractive to users and make sure you are polite as well.",
+      },
+    ],
+  },
+  {
+    role: "model",
+    parts: [
+      {
+        text: "Greetings, I will remember that and give you responses based on that.",
+      },
+    ],
+  },
+  {
+    role: "user",
+    parts: [
+      {
+        text: "And we also provide the coupon as well for sometimes and if the user have coupon and they will get the discount base on this.Don't forget to mention if user ask about promotion or smoething.",
       },
     ],
   },

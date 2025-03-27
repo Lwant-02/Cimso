@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { CustomButton } from "../UI/CustomButton";
 import { ShoppingCart } from "lucide-react";
 import { SummaryInfo } from "../Payment/SummaryInfo";
@@ -99,7 +99,7 @@ export const OrderContainer = () => {
             <option disabled value="">
               Select a coupon
             </option>
-            {authUser.coupons.map((item, index) => (
+            {authUser.coupons?.map((item, index) => (
               <option key={index} value={item.code}>
                 {item.code}
               </option>
@@ -127,7 +127,9 @@ export const OrderContainer = () => {
           </span>
           <span className="flex justify-between">
             <p className="text-base font-semibold">Total</p>
-            <p className="text-base font-semibold">฿{!finalPrice ? "0" : `${finalPrice}`}</p>
+            <p className="text-base font-semibold">
+              ฿{!finalPrice ? "0" : `${finalPrice}`}
+            </p>
           </span>
           <CustomButton
             buttonName="Book Now"

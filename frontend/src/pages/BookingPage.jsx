@@ -84,12 +84,11 @@ export const BookingPage = () => {
                     key={course.course_name}
                     name={course.course_name}
                     image={course.image_url}
-                    subDescription={course.description}
+                    subDescription={course.sub_description}
                     rating={course.rating}
                     status="Available"
                     delay={0.1 * (index + 1)}
                     discount={course.discount}
-                    // location={}
                     id={course.id}
                   />
                 ))}

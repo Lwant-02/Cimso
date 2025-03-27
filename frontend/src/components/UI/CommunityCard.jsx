@@ -8,6 +8,7 @@ export const CommunityCard = ({
   twitter_url,
   name,
   bio,
+  image,
 }) => {
   const [showSocialLinks, setShowSocialLinks] = useState(false);
   const url =
@@ -42,7 +43,7 @@ export const CommunityCard = ({
 
       {/* Image Container */}
       <div className="relative h-80 w-full">
-        <img src={url} alt="Profile" className="w-full h-full object-cover" />
+        <img src={image} alt="Profile" className="w-full h-full object-cover" />
       </div>
 
       {/* Profile Info Overlay */}
@@ -56,7 +57,7 @@ export const CommunityCard = ({
         <div className="relative">
           <button
             onClick={() => setShowSocialLinks(!showSocialLinks)}
-            className="sm:w-full bg-white/20 backdrop-blur-sm text-white cursor-pointer py-2 px-4 rounded-full flex justify-center sm:text-base text-xs items-center hover:bg-white/30 transition-all"
+            className="sm:w-full bg-white backdrop-blur-sm text-gray-950 cursor-pointer py-2 px-4 rounded-full flex justify-center sm:text-base text-xs items-center hover:bg-white/30 transition-all"
           >
             Social Links
             <ChevronUp className="ml-2 sm:sixe-6 size-3" />

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { CustomButton } from "../UI/CustomButton";
 import { Search } from "lucide-react";
 import { useBookingStore } from "../../store/useBookingStore";
+import { useNewBookingStore } from "../../store/useNewBookingStore";
 
 export const BookingSearchField = ({
   value,
@@ -11,7 +12,8 @@ export const BookingSearchField = ({
   setFilteredCourses,
   setHasSearched,
 }) => {
-  const { courses } = useBookingStore();
+  // const { courses } = useBookingStore();
+  const { courses } = useNewBookingStore();
   const handleSearch = () => {
     if (!value.trim()) return;
     setHasSearched(true);
@@ -20,9 +22,9 @@ export const BookingSearchField = ({
     setTimeout(() => {
       const result = courses.filter(
         (course) =>
-          course.courseName.toLowerCase().includes(value.toLowerCase()) ||
-          course.location.city.toLowerCase().includes(value.toLowerCase()) ||
-          course.location.country.toLowerCase().includes(value.toLowerCase())
+          course.course_name.toLowerCase().includes(value.toLowerCase()) ||
+          course.location_city.toLowerCase().includes(value.toLowerCase()) ||
+          course.location_country.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredCourses(result);
       setIsSearching(false);

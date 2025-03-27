@@ -195,7 +195,7 @@ export const ReservationPage = () => {
                     </div>
                   </div>
                   <div className="w-full flex justify-end items-end mt-2 w-">
-                    {booking.status === "cancelled" && (
+                    {booking.status === "confirmed" && (
                       <CustomButton
                         buttonName="Cancel Booking"
                         style="w-40"
