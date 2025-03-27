@@ -22,7 +22,7 @@ export const CommunityCard = ({
     },
     {
       icon: <Facebook className="sm:size-5 size-3" />,
-      name: "Twitter",
+      name: "Facebook",
       url: facebook_url,
     },
     {
